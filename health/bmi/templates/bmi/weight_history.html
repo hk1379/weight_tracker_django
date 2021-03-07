@@ -1,0 +1,41 @@
+{% extends 'bmi/home.html' %}
+
+{% block 'body' %}
+
+<body>
+<h1 class="header">Weight History</h1>
+<h1>practice</h1>
+{{context}}
+{{weight_tracker_objs1}}
+
+{% for x in weight_tracker_objs1 %}
+  <div>
+    <p>name: {{x.name}}</p>
+    <p>weight: {{x.weight}}</p>
+    <p>date: {{x.date}}</p>
+  </div>
+{% endfor %}
+
+<figure class="css-chart">
+  <ul class="line-chart">
+    <li>
+      <div class="data-point" data-value="25"></div>
+    </li>
+    <li>
+      <div class="data-point" data-value="60"></div>
+    </li>
+    <li>
+      <div class="data-point" data-value="30"></div>
+    </li>
+    <li>
+      <div class="data-point" data-value="50"></div>
+    </li>
+  </ul>
+</figure>
+
+
+
+
+
+</body>
+{% endblock %}

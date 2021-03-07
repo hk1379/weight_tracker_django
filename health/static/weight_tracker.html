@@ -1,0 +1,45 @@
+{% extends 'bmi/home.html' %}
+
+{% block 'body' %}
+
+<body>
+<h1 class="header">Weight Tracker</h1>
+
+<p>Use the below table to submit your weight over the past months. This will allow us to generate a chart of your weight journey over the past few months!</p>
+
+<div class="container">
+  <form class="form" id="tracker" method="post" action="weight_tracker">
+    {% csrf_token %}
+    <h1 class="form-title">Tracker</h1>
+    <div class="form-message form-message-error"></div>
+    <div class="form-label">
+      <label for="date-field">Date</label>
+    </div>
+    <div class="form-input-group">
+      <input type="date" class="form-input" name ="date-field" autofocus>
+      <div class="form-input-error-message"></div>
+    </div>
+    <div class="form-message form-message-error"></div>
+    <div class="form-label">
+      <label for="weight-field">Weight (kg)</label>
+    </div>
+    <div class="form-input-group">
+      <input type="text" class="form-input" name ="weight-field" autofocus placeholder="Weight (kg)">
+      <div class="form-input-error-message"></div>
+    </div>
+    <div class="form-input-group">
+      <button class="form-button" type="submit">Save Weight</button>
+    </div>
+    <div class="form-input-group">
+      <input type="text" name="display" class="form-input" value="{{weight}}">
+    </div>
+    <div class="form-input-group">
+      <input type="text" name="display" class="form-input" value="{{date}}">
+    </div>
+    <div class="form-input-group">
+      <input type="text" name="display" class="form-input" value="{{upload}}">
+    </div>
+  </form>
+</div>
+</body>
+{% endblock %}
