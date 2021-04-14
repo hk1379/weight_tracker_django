@@ -13,11 +13,20 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     bmi = ""
+    bmi_status = ""
     if request.method == 'POST':
         height = float(request.POST["height-field"])
         weight = int(request.POST["weight-field"])
-        bmi = weight/ (height * height)
-    return render(request, 'bmi/home.html', {'calculate_bmi':bmi})
+        bmi = round(weight/ (height * height),2)
+        if bmi < 18.5:
+            bmi_status = "Underweight"
+        elif bmi >= 18.5 and bmi < 25.0:
+            bmi_status = "Normal"
+        elif bmi >= 25.0 and bmi < 40.0:
+            bmi_status = "Overweight"
+        else:
+            bmi_status = "Obese"
+    return render(request, 'bmi/home.html', {'calculate_bmi':bmi, 'bmi_status': bmi_status})
 
 def registration(request):
     if request.user.is_authenticated:
@@ -31,8 +40,7 @@ def registration(request):
                 form.save()
                 user = form.cleaned_data.get('username')
                 messages.success(request, 'Account has been created for' + user)
-
-                return redirect('login_page')
+                return redirect('login')
 
 
         context ={'form': form}
@@ -77,10 +85,13 @@ def weight_tracker(request):
     return render(request, 'bmi/weight_tracker.html', {'weight': weight, 'date': date, 'upload': upload})
 
 def weight_history(request, name):
-    #weight_tracker_objs = Tracker.objects.get(pk=pk)
-    #weight_tracker_objs1 = Tracker.objects.filter(id=pk)
-    weight_tracker_objs1 = Tracker.objects.filter(name=name)
-    context = {
-        'tracker':weight_tracker,
-    }
-    return render(request, 'bmi/weight_history.html', {'context':context,'weight_tracker_objs1':weight_tracker_objs1})#, {'weight_tracker':weight_tracker})
+    weight_tracker_objs1 = Tracker.objects.filter(name=name).order_by('date')
+    tracker = ""
+    if request.method == 'POST':
+        if request.POST['action'] == 'delete-record':
+            id_delete = request.POST["id-field"]
+            Tracker.objects.get(id=id_delete).delete()
+        elif request.POST['action'] == 'delete-all-records':
+            user = request.user
+            Tracker.objects.filter(name=user).delete()
+    return render(request, 'bmi/weight_history.html', {'weight_tracker_objs1':weight_tracker_objs1})#, {'weight_tracker':weight_tracker})

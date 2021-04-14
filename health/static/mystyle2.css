@@ -1,84 +1,83 @@
-body{
-  --colour-primary: #0066ff;
-  --colour-primary-dark: #0000cc;
-  --colour-secondary: #00004d;
-  --colour-error: #ff0000;
-  --colour-success: #4bb544;
-  --border-radius: 4px;
-
-  margin: 0;
-  height: 100vh;
-  font-size: 18px;
-  background:url(/health-background.jpg);
-  background-size:cover;
+/* Ensuring padding and border is included in the width and height of elements */
+*{
+	box-sizing: border-box;
 }
 
-.switch{
-  position: relative;
-  display: inline;
-  width: 60px;
-  height: 34px;
+/* Creating a grid view - this is when the webpage is broken down into multiple columns  */
+.col-1 {width: 8.3%;}
+.col-2 {width: 16.67%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.67%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.67%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.67%;}
+.col-12 {width: 100%;}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
 }
 
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
+/* columns inside a row float to the left */
+/* all elements will be placed all the way to the left */
+/* below css prevents this */
+.row::after {
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  clear: both;
+  display: table;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+/* font */
+html {
+  font-family: "Lucida Sans", sans-serif;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+/* Removing bullet points, padding and margin from nav bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+/* Adding a blue background to the navigation bar*/
+.nav{
+	background-color: #0A72EA;
+	overflow:hidden;
 }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
+/* Styling the links in the navbar */
+.nav a{
+	float: left;
+	color: white;
+	text-align: center;
+	padding: 10px 20px;
+	text-decoration: none;
+	font-size: 17px;
 }
 
-.slider.round:before {
-  border-radius: 50%;
+/* changing colour of links when hovering on them */
+.nav a:hover{
+	background-color: white;
+	color: black;
 }
 
-.header{
-  margin-left: 15px;
+/* Adding a colour to the active/current link */
+.nav a.active{
+	background-color:green;
+	color: blue;
 }
 
-p{
-  margin-left: 15px;
+/* floating some items in nav bar to the right */
+.nav-right{
+	float: right;
 }
 
+/* stlying container class */
 .container{
-  width: 400px;
-  max-width: 400px;
   margin: 1rem;
   padding: 2rem;
   border-radius: 4px;
@@ -86,6 +85,18 @@ p{
   background: #e6f5ff;
   font-family: sans-serif;
   font-weight: 500;
+}
+
+.green{
+	background-color:#0BD54D;
+}
+
+.amber{
+	background-color:#ffbf00;
+}
+
+.red{
+	background-color:#DC6238;
 }
 
 /* getting rid of margin at top */
@@ -103,21 +114,18 @@ p{
   margin-bottom: 1rem;
 }
 
-.form-message-success{
-  color: var(--colour-success);
-}
-
-.form-message-error{
-  color: var(--colour-error);
-}
-
 .form-title{
-  margin-bottom: 2rem;
+  margin-top: 1rem;
   text-align: center;
+  font-size: 25px;
+}
+
+.form-label{
+  margin-left: 0.2rem;
 }
 
 .form-input-group{
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .form-input{
@@ -138,12 +146,6 @@ p{
   border-width: 1px;
 }
 
-/* doesnt work??? */
-.form-input-error{
-  color: var(--colour-error);
-  border-color: var(--colour-error);
-}
-
 .form-input-error-message{
   margin-top: 0.5rem;
   font-size: 0.85rem;
@@ -160,11 +162,11 @@ p{
   border-radius: Black;
   outline: none;
   cursor: pointer;
-  background: #3d5249;
+  background: #0A72EA;
 }
 
 .form-button:hover{
-  background: var(--colour-primary-dark);
+  background: #000080;
 }
 
 .form-button:active {
@@ -175,80 +177,13 @@ p{
   text-align: center;
 }
 
-ul {
-  list-style-type:none;
-  background-color: #0066ff;
+/* Adding border to table */
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 10px;
 }
 
-/* making list items in line */
-li {
-  display: inline;
+th {
+	background-color: #e6f5ff;
 }
-
-/* links in lists */
-li a {
-  color: white;
-  text-align: center;
-  padding: 10px 14px;
-  text-decoration: none;
-}
-
-/* hovering over list items*/
-li a:hover{
-  text-decoration: underline;
-
-/* active li should be underlined */
-.active{
-  text-decoration: underline;
-}
-
-/* the parent element for the chart */
-.css-chart {
-  /* chart borders */
-  border-bottom: 1px solid;
-  border-left: 1px solid;
-  height: 200px;
-  margin: 1em;
-  padding: 0;
-  position: relative;
-  width: 200px;
-}
-
-/* styling for unordered list */
-.line-chart {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* each point in the chart */
-.data-point {
-  background-color: white;
-  border: 1px solid lightblue;
-  border-radius: 50%;
-  height: 50px;
-  position: absolute;
-  width: 12px;
-}
-
-
-/* grid view with 12 columns - cant get it to work
-.col-1 {width: 8.33%;}
-.col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
-.col-4 {width: 33.33%;}
-.col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
-.col-7 {width: 58.33%;}
-.col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
-
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-*/

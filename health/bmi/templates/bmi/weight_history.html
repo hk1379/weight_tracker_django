@@ -3,39 +3,49 @@
 {% block 'body' %}
 
 <body>
-<h1 class="header">Weight History</h1>
-<h1>practice</h1>
-{{context}}
-{{weight_tracker_objs1}}
 
-{% for x in weight_tracker_objs1 %}
-  <div>
-    <p>name: {{x.name}}</p>
-    <p>weight: {{x.weight}}</p>
-    <p>date: {{x.date}}</p>
+  <div class="row">
+  	<div class="col-12">Below is table of your weight history</div>
   </div>
-{% endfor %}
 
-<figure class="css-chart">
-  <ul class="line-chart">
-    <li>
-      <div class="data-point" data-value="25"></div>
-    </li>
-    <li>
-      <div class="data-point" data-value="60"></div>
-    </li>
-    <li>
-      <div class="data-point" data-value="30"></div>
-    </li>
-    <li>
-      <div class="data-point" data-value="50"></div>
-    </li>
-  </ul>
-</figure>
+  <div class="row">
+    <div class="col-4">
+        <table id="customers">
+          <tr>
+            <th>Date</th>
+            <th>Weight (kg)</th>
+            <th>ID</th>
+          </tr>
+          <tr>
+          {% for x in weight_tracker_objs1 %}
+            <td>{{x.date}}</td>
+            <td>{{x.weight}}</td>
+            <td>{{x.id}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+    </div>
+  </div>
 
-
-
-
+  <div class="row">
+    <div class="col-4">
+      <div class="container">
+        <form class="form" id="delete-records" method="post" action="">
+          {% csrf_token %}
+          <div class="form-label">
+            <label for="weight-field">ID</label>
+          </div>
+          <div class="form-input-group">
+            <input type="text" class="form-input" name="id-field" autofocus placeholder="ID">
+          </div>
+          <div>
+            <button type="submit" name="action" value="delete-record">Delete ID</button>
+            <button type="submit" name="action" value="delete-all-records">Delete All</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 </body>
 {% endblock %}
