@@ -5,6 +5,7 @@
 
 #Download the files for this project in a suitable location. Go to this location on the command line and then follow the instructions below.
 
+
 #For Windows Users:
 #Download Python from the following link: https://www.python.org/
 #Ensure that Pip (package manager) is also downloaded with Python
